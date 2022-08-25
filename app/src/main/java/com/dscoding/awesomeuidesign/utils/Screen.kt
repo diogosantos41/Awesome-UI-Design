@@ -1,4 +1,4 @@
-package com.dscoding.awesomeuidesign
+package com.dscoding.awesomeuidesign.utils
 
 sealed class Screen(val route: String) {
     object DashboardScreen: Screen("dashboard_screen")
