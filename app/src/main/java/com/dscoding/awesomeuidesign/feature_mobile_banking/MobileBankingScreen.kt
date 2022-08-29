@@ -1,12 +1,17 @@
 package com.dscoding.awesomeuidesign.feature_mobile_banking
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterVertically
 import androidx.compose.ui.Modifier
@@ -27,39 +32,49 @@ import com.google.accompanist.pager.*
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun MobileBankingScreen() {
+
+    val currentScreen = remember { mutableStateOf(getBankingMenuNavigation()[0]) }
     val state = rememberPagerState(pageCount = 3)
 
-    Column(
-        modifier = Modifier
-            .verticalScroll(rememberScrollState())
-            .background(Color.White)
-    ) {
-        Column(modifier = Modifier.background(PurpleDark)) {
-            Spacer(modifier = Modifier.height(20.dp))
-            Header()
-            Spacer(modifier = Modifier.height(70.dp))
+    Scaffold(
+        bottomBar = {
+            CustomBottomNavigation(currentScreen = currentScreen.value) {
+                currentScreen.value = it
+            }
         }
+    ) {
         Column(
             modifier = Modifier
-                .offset(y = (-70).dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .verticalScroll(rememberScrollState())
+                .background(Color.White)
         ) {
-
-            Spacer(modifier = Modifier.height(20.dp))
-            CardPager(pagerState = state)
-            Spacer(modifier = Modifier.height(15.dp))
-            HorizontalPagerIndicator(
-                pagerState = state,
-                activeColor = PurpleDark
-            )
+            Column(modifier = Modifier.background(PurpleDark)) {
+                Spacer(modifier = Modifier.height(20.dp))
+                Header()
+                Spacer(modifier = Modifier.height(70.dp))
+            }
             Column(
-                modifier = Modifier.padding(horizontal = 20.dp),
+                modifier = Modifier
+                    .offset(y = (-70).dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
+
+                Spacer(modifier = Modifier.height(20.dp))
+                CardPager(pagerState = state)
                 Spacer(modifier = Modifier.height(15.dp))
-                ActionsSection()
-                Spacer(modifier = Modifier.height(15.dp))
-                RecentActivitySection()
+                HorizontalPagerIndicator(
+                    pagerState = state,
+                    activeColor = PurpleDark
+                )
+                Column(
+                    modifier = Modifier.padding(horizontal = 20.dp),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Spacer(modifier = Modifier.height(15.dp))
+                    ActionsSection()
+                    Spacer(modifier = Modifier.height(15.dp))
+                    RecentActivitySection()
+                }
             }
         }
     }
@@ -113,17 +128,18 @@ fun Header() {
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun CardPager(pagerState: PagerState) {
+    var bankingCards = getBankingCards()
     HorizontalPager(
         state = pagerState,
         modifier = Modifier
             .fillMaxSize()
-    ) {
-        BankingCard()
+    ) { page ->
+        BankingCardUI(bankingCards[page])
     }
 }
 
 @Composable
-fun BankingCard() {
+fun BankingCardUI(bankingCard: BankingCard) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -131,7 +147,7 @@ fun BankingCard() {
             .padding(horizontal = 20.dp),
         elevation = 4.dp,
         shape = RoundedCornerShape(20.dp),
-        backgroundColor = Purple
+        backgroundColor = bankingCard.color
     ) {
         Row(
             modifier = Modifier
@@ -145,15 +161,15 @@ fun BankingCard() {
                         .padding(top = 10.dp),
                 )
                 Text(
-                    text = "30,000.41€",
+                    text = bankingCard.balance,
                     color = Color.White,
                     fontSize = 22.sp,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(10.dp))
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Row(verticalAlignment = CenterVertically) {
                     Text(
-                        text = "**** **** **** 0321",
+                        text = "**** **** **** ".plus(bankingCard.lastDigits),
                         color = Color.White,
                         fontSize = 20.sp
                     )
@@ -233,11 +249,11 @@ fun ActionButton(
                 .size(72.dp)
                 .background(
                     color = backgroundColor,
-                    shape = RoundedCornerShape(12.dp)
+                    shape = RoundedCornerShape(12.dp),
                 )
                 .padding(18.dp)
         ) {
-            Image(painter = icon, contentDescription = "", modifier = Modifier.fillMaxSize())
+            Image(painter = icon, contentDescription = "", modifier = Modifier.fillMaxSize().padding(3.dp))
         }
         Spacer(modifier = Modifier.height(5.dp))
         Text(
@@ -263,16 +279,16 @@ fun RecentActivitySection() {
                 Text(text = "More", color = PurpleDark)
             }
         }
-        val items = getBankingActivity()
+        val items = getBankingTransactions()
         items.forEach {
-            ActivityItem(it)
+            TransactionItem(it)
             Spacer(modifier = Modifier.height(8.dp))
         }
     }
 }
 
 @Composable
-fun ActivityItem(bankingActivity: BankingActivity) {
+fun TransactionItem(bankingActivity: BankingTransaction) {
     Box(
         Modifier
             .fillMaxWidth()
@@ -311,6 +327,83 @@ fun ActivityItem(bankingActivity: BankingActivity) {
                 fontSize = 14.sp,
                 fontWeight = FontWeight.Bold
             )
+        }
+    }
+}
+
+@OptIn(ExperimentalAnimationApi::class)
+@Composable
+fun CustomBottomNavigation(
+    currentScreen: BankingMenuNavigation,
+    onItemSelected: (BankingMenuNavigation) -> Unit
+) {
+
+    val menus = getBankingMenuNavigation()
+
+    Row(
+        modifier = Modifier
+            .background(PurpleDark)
+            .padding(8.dp)
+            .fillMaxWidth(),
+        horizontalArrangement = Arrangement.SpaceAround,
+        verticalAlignment = CenterVertically
+    ) {
+
+        menus.forEach { menu ->
+            CustomBottomNavigationItem(
+                item = menu,
+                isSelected = menu.title == currentScreen.title
+            ) {
+                onItemSelected(menu)
+            }
+
+        }
+
+    }
+
+}
+
+@ExperimentalAnimationApi
+@Composable
+fun CustomBottomNavigationItem(
+    item: BankingMenuNavigation,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+
+    val background =
+        if (isSelected) WhiteDirty.copy(alpha = 0.2f) else Color.Transparent
+    val contentColor =
+        if (isSelected) Color.White else Color.White
+
+    Box(
+        modifier = Modifier
+            .clip(CircleShape)
+            .background(background)
+            .clickable(onClick = onClick)
+    ) {
+        Row(
+            modifier = Modifier
+                .padding(12.dp),
+            verticalAlignment = CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp)
+        ) {
+
+            Icon(
+                modifier = Modifier.size(24.dp),
+                imageVector = item.icon,
+                contentDescription = null,
+                tint = contentColor
+            )
+
+            AnimatedVisibility(visible = isSelected) {
+                Text(
+                    text = item.title,
+                    color = contentColor,
+                    fontWeight = FontWeight.Bold
+                )
+            }
+
         }
     }
 }
