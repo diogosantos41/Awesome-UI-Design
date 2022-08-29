@@ -1,11 +1,17 @@
 package com.dscoding.awesomeuidesign.feature_mobile_banking
 
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.MailOutline
+import androidx.compose.material.icons.filled.Settings
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.dscoding.awesomeuidesign.R
-import com.dscoding.awesomeuidesign.ui.theme.*
+import com.dscoding.awesomeuidesign.ui.theme.Green
+import com.dscoding.awesomeuidesign.ui.theme.GreenDark
+import com.dscoding.awesomeuidesign.ui.theme.GreyDark
+import com.dscoding.awesomeuidesign.ui.theme.Purple
 
 
 data class BankingCard(
@@ -16,7 +22,7 @@ data class BankingCard(
 
 
 fun getBankingCards(): List<BankingCard> {
-    var cards = mutableListOf<BankingCard>()
+    val cards = mutableListOf<BankingCard>()
     cards.add(BankingCard("30,000.41€", "0321", Purple))
     cards.add(BankingCard("10.232,12€", "9102", GreyDark))
     cards.add(BankingCard("230.00€", "4132", GreenDark))
@@ -32,7 +38,7 @@ data class BankingTransaction(
 )
 
 fun getBankingTransactions(): List<BankingTransaction> {
-    var transactions = mutableListOf<BankingTransaction>()
+    val transactions = mutableListOf<BankingTransaction>()
     transactions.add(
         BankingTransaction(
             R.drawable.ic_transfer,
@@ -105,11 +111,10 @@ data class BankingMenuNavigation(
 )
 
 fun getBankingMenuNavigation(): List<BankingMenuNavigation> {
-    var menu = mutableListOf<BankingMenuNavigation>()
+    val menu = mutableListOf<BankingMenuNavigation>()
     menu.add(BankingMenuNavigation(Icons.Default.Home, "Home"))
     menu.add(BankingMenuNavigation(Icons.Default.MailOutline, "Messages"))
     menu.add(BankingMenuNavigation(Icons.Default.AccountCircle, "Account"))
     menu.add(BankingMenuNavigation(Icons.Default.Settings, "Settings"))
     return menu
-
 }

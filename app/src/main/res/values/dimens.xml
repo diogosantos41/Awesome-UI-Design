@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="genericSmallMargin">15dp</dimen>
+    <dimen name="genericMargin">20dp</dimen>
+    <dimen name="genericHorizontalMargin">20dp</dimen>
+    <dimen name="bankingCardOffSetMargin">70dp</dimen>
+</resources>

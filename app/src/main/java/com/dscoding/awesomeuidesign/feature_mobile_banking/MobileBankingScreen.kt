@@ -19,6 +19,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -26,7 +27,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.dscoding.awesomeuidesign.R
-import com.dscoding.awesomeuidesign.ui.theme.*
+import com.dscoding.awesomeuidesign.ui.theme.AwesomeUIDesignTheme
+import com.dscoding.awesomeuidesign.ui.theme.PurpleDark
+import com.dscoding.awesomeuidesign.ui.theme.Shapes
+import com.dscoding.awesomeuidesign.ui.theme.WhiteDirty
 import com.google.accompanist.pager.*
 
 @OptIn(ExperimentalPagerApi::class)
@@ -34,7 +38,12 @@ import com.google.accompanist.pager.*
 fun MobileBankingScreen() {
 
     val currentScreen = remember { mutableStateOf(getBankingMenuNavigation()[0]) }
-    val state = rememberPagerState(pageCount = 3)
+    val state = rememberPagerState(getBankingCards().size)
+    val margin = dimensionResource(R.dimen.genericMargin)
+    val marginHalf = dimensionResource(R.dimen.genericSmallMargin)
+    val horizontalMargin = dimensionResource(R.dimen.genericHorizontalMargin)
+    val cardOffsetMargin = dimensionResource(R.dimen.bankingCardOffSetMargin)
+
 
     Scaffold(
         bottomBar = {
@@ -49,17 +58,16 @@ fun MobileBankingScreen() {
                 .background(Color.White)
         ) {
             Column(modifier = Modifier.background(PurpleDark)) {
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(marginHalf))
                 Header()
-                Spacer(modifier = Modifier.height(70.dp))
+                Spacer(modifier = Modifier.height(cardOffsetMargin))
             }
             Column(
                 modifier = Modifier
-                    .offset(y = (-70).dp),
+                    .offset(y = (-cardOffsetMargin)),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-
-                Spacer(modifier = Modifier.height(20.dp))
+                Spacer(modifier = Modifier.height(marginHalf))
                 CardPager(pagerState = state)
                 Spacer(modifier = Modifier.height(15.dp))
                 HorizontalPagerIndicator(
@@ -67,12 +75,11 @@ fun MobileBankingScreen() {
                     activeColor = PurpleDark
                 )
                 Column(
-                    modifier = Modifier.padding(horizontal = 20.dp),
+                    modifier = Modifier.padding(horizontal = horizontalMargin),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Spacer(modifier = Modifier.height(15.dp))
                     ActionsSection()
-                    Spacer(modifier = Modifier.height(15.dp))
+                    Spacer(modifier = Modifier.height(marginHalf))
                     RecentActivitySection()
                 }
             }
@@ -82,10 +89,11 @@ fun MobileBankingScreen() {
 
 @Composable
 fun Header() {
+    val horizontalMargin = dimensionResource(R.dimen.genericHorizontalMargin)
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = horizontalMargin),
         verticalAlignment = CenterVertically
     ) {
         Image(
@@ -140,11 +148,12 @@ fun CardPager(pagerState: PagerState) {
 
 @Composable
 fun BankingCardUI(bankingCard: BankingCard) {
+    val horizontalMargin = dimensionResource(R.dimen.genericHorizontalMargin)
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .height(160.dp)
-            .padding(horizontal = 20.dp),
+            .padding(horizontal = horizontalMargin),
         elevation = 4.dp,
         shape = RoundedCornerShape(20.dp),
         backgroundColor = bankingCard.color
@@ -253,7 +262,11 @@ fun ActionButton(
                 )
                 .padding(18.dp)
         ) {
-            Image(painter = icon, contentDescription = "", modifier = Modifier.fillMaxSize().padding(3.dp))
+            Image(
+                painter = icon, contentDescription = "", modifier = Modifier
+                    .fillMaxSize()
+                    .padding(3.dp)
+            )
         }
         Spacer(modifier = Modifier.height(5.dp))
         Text(
