@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.dscoding.awesomeuidesign.feature_grocery_shop.GroceryShopScreen
 import com.dscoding.awesomeuidesign.feature_mobile_banking.MobileBankingScreen
+import com.dscoding.awesomeuidesign.feature_social_media.SocialMediaScreen
 import com.dscoding.awesomeuidesign.utils.Screen
 
 @Composable
@@ -27,7 +28,7 @@ fun Navigation() {
             // LoginScreen(navController = navController)
         }
         composable(route = Screen.SocialMediaScreen.route) {
-            // SocialMediaScreen(navController = navController)
+            SocialMediaScreen()
         }
         composable(route = Screen.CryptoCurrencyScreen.route) {
             // CryptoCurrencyScreen(navController = navController)
