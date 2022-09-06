@@ -2,21 +2,21 @@ package com.dscoding.awesomeuidesign.feature_social_media
 
 import com.dscoding.awesomeuidesign.R
 
-data class UserRecentStories(
+data class UserRecentStory(
     var username: String,
     var avatar: Int,
     var hasUpdates: Boolean
 )
 
 
-fun getSocialMediaUserRecentStories(): List<UserRecentStories> {
-    val stories = mutableListOf<UserRecentStories>()
-    stories.add(UserRecentStories("Jane", R.drawable.ic_user, true))
-    stories.add(UserRecentStories("John", R.drawable.ic_user, true))
-    stories.add(UserRecentStories("George", R.drawable.ic_user, false))
-    stories.add(UserRecentStories("Matt", R.drawable.ic_user, false))
-    stories.add(UserRecentStories("James", R.drawable.ic_user, false))
-    stories.add(UserRecentStories("Lily", R.drawable.ic_user, false))
-    stories.add(UserRecentStories("Harry", R.drawable.ic_user, false))
+fun getSocialMediaUserRecentStories(): List<UserRecentStory> {
+    val stories = mutableListOf<UserRecentStory>()
+    stories.add(UserRecentStory("Jane", R.drawable.ic_user, true))
+    stories.add(UserRecentStory("John", R.drawable.ic_user, true))
+    stories.add(UserRecentStory("George", R.drawable.ic_user, false))
+    stories.add(UserRecentStory("Matt", R.drawable.ic_user, false))
+    stories.add(UserRecentStory("James", R.drawable.ic_user, false))
+    stories.add(UserRecentStory("Lily", R.drawable.ic_user, false))
+    stories.add(UserRecentStory("Harry", R.drawable.ic_user, false))
     return stories
 }
