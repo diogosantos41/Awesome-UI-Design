@@ -58,6 +58,7 @@ fun SocialMediaScreen() {
                 .padding(bottom = 15.dp)
         ) {
             AppBar()
+            Spacer(modifier = Modifier.height(5.dp))
             UsersRecentUpdatesList()
         }
         Feed()
@@ -86,10 +87,12 @@ fun AppBar() {
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Rounded.Search,
-                    contentDescription = "Search"
+                    contentDescription = "Search",
+                    tint = GreyDark
                 )
             },
             colors = TextFieldDefaults.textFieldColors(
+                textColor = GreyDark,
                 backgroundColor = Color.White,
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent
@@ -146,7 +149,7 @@ fun UsersRecentUpdatesList() {
                             }
                     )
                     Spacer(modifier = Modifier.height(5.dp))
-                    Text(text = "New", fontSize = 13.sp)
+                    Text(text = "New", fontSize = 13.sp, style = TextStyle(color = GreyDark))
                 }
             }
         }
@@ -176,7 +179,7 @@ fun UsersRecentUpdatesList() {
                         }
                 )
                 Spacer(modifier = Modifier.height(5.dp))
-                Text(text = user.username, fontSize = 13.sp)
+                Text(text = user.username, fontSize = 13.sp, style = TextStyle(color = GreyDark))
             }
         }
     }
@@ -295,7 +298,9 @@ fun FollowButton() {
             )
             Spacer(modifier = Modifier.width(8.dp))
             IconButton(
-                modifier = Modifier.size(15.dp).scale(scale = scale.value),
+                modifier = Modifier
+                    .size(15.dp)
+                    .scale(scale = scale.value),
                 onClick = { isSelected = !isSelected }) {
                 Icon(
                     modifier = Modifier.size(15.dp),
