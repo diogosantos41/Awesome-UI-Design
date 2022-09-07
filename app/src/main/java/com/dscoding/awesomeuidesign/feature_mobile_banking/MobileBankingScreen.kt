@@ -97,7 +97,7 @@ fun Header() {
         verticalAlignment = CenterVertically
     ) {
         Image(
-            painter = painterResource(id = R.drawable.ic_user),
+            painter = painterResource(id = R.drawable.ic_user_6),
             contentDescription = "",
             contentScale = ContentScale.Crop,
             modifier = Modifier

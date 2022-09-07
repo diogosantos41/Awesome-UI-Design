@@ -3,8 +3,15 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_camera.xml" value="0.1265" />
         <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1265" />
         <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_transfer.xml" value="0.1265" />
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_user.xml" value="0.1265" />
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_user_1.xml" value="0.1265" />
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_user_2.xml" value="0.1265" />
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_user_3.xml" value="0.1265" />
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_user_4.xml" value="0.1265" />
+        <entry key="..\:/Users/didex/Documents/GitHub/Awesome-UI-Design/app/src/main/res/drawable/ic_user_5.xml" value="0.1265" />
       </map>
     </option>
   </component>
