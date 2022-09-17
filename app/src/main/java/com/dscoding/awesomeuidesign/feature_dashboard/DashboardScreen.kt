@@ -38,7 +38,7 @@ fun DashboardScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(22.dp))
         Text(text = "Awesome UI Design", fontWeight = FontWeight.SemiBold, fontSize = 24.sp)
         Text(
-            text = "6 Unique App Design Ideas",
+            text = "6 App Design Ideas",
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp,
             color = Color(R.color.black)
@@ -56,20 +56,28 @@ fun DashboardScreen(navController: NavController) {
                 subtitle = "Awesome UI Design",
                 onClick = { navController.navigate(Screen.SocialMediaScreen.route) })
             Item(
-                icon = ImageVector.vectorResource(id = R.drawable.ic_grocery_shop),
-                title = "Grocery Shop",
+                icon = ImageVector.vectorResource(id = R.drawable.ic_crypto_currency),
+                title = "Crypto Currency",
                 subtitle = "Awesome UI Design",
-                onClick = { navController.navigate(Screen.GroceryShopScreen.route) })
+                onClick = { navController.navigate(Screen.CryptoCurrencyScreen.route) })
+
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(
+                text = "To be implemented..",
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp,
+                color = Color(R.color.black)
+            )
             Item(
                 icon = ImageVector.vectorResource(id = R.drawable.ic_login),
                 title = "Login Screen",
                 subtitle = "Awesome UI Design",
                 onClick = { navController.navigate(Screen.LoginScreen.route) })
             Item(
-                icon = ImageVector.vectorResource(id = R.drawable.ic_crypto_currency),
-                title = "Crypto Currency",
+                icon = ImageVector.vectorResource(id = R.drawable.ic_grocery_shop),
+                title = "Grocery Shop",
                 subtitle = "Awesome UI Design",
-                onClick = { navController.navigate(Screen.CryptoCurrencyScreen.route) })
+                onClick = { navController.navigate(Screen.GroceryShopScreen.route) })
         }
         Spacer(modifier = Modifier.height(16.dp))
     }
