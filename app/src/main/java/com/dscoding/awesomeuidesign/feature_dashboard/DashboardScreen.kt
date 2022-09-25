@@ -38,7 +38,7 @@ fun DashboardScreen(navController: NavController) {
         Spacer(modifier = Modifier.height(22.dp))
         Text(text = "Awesome UI Design", fontWeight = FontWeight.SemiBold, fontSize = 24.sp)
         Text(
-            text = "6 App Design Ideas",
+            text = "App Design Ideas",
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp,
             color = Color(R.color.black)

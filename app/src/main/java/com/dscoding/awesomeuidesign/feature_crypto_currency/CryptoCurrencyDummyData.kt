@@ -69,7 +69,6 @@ data class StockChartItem(
     val close: Double
 )
 
-@RequiresApi(Build.VERSION_CODES.O)
 fun getStockChartInfo(): List<StockChartItem> {
     val stockChartInfo = mutableListOf<StockChartItem>()
     stockChartInfo.add(

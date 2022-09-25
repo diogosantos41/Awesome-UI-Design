@@ -34,7 +34,6 @@ import java.lang.Math.round
 import kotlin.math.roundToInt
 
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun CryptoCurrencyScreen() {
     val horizontalPadding = 16.dp
@@ -113,7 +112,7 @@ fun PortfolioItem(
         elevation = 4.dp,
         shape = RoundedCornerShape(20.dp),
         modifier = modifier
-            .width(180.dp)
+            .width(190.dp)
     ) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.Center) {
             Image(
@@ -134,7 +133,7 @@ fun PortfolioItem(
                         color = White,
                         fontWeight = FontWeight.SemiBold,
                         fontSize = 12.sp,
-                        modifier = Modifier.padding(2.dp)
+                        modifier = Modifier.padding(vertical = 2.dp, horizontal = 6.dp)
                     )
                 }
             }
@@ -146,14 +145,13 @@ fun PortfolioItem(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun StockChart(
     stockChartInfo: List<StockChartItem> = emptyList(),
     modifier: Modifier = Modifier,
-    graphColor: Color = White
+    graphColor: Color = White,
 ) {
-    val spacing = 100f
+    val spacing = 50f
     val transparentGraphColor = remember {
         graphColor.copy(alpha = 0.5f)
     }
@@ -174,7 +172,8 @@ fun StockChart(
     Card(
         backgroundColor = GreyDark,
         shape = RoundedCornerShape(20.dp),
-        elevation = 0.dp
+        elevation = 0.dp,
+        modifier = Modifier.padding(end = 16.dp)
     ) {
         Canvas(modifier = modifier) {
             val spacePerHour = (size.width - spacing) / stockChartInfo.size
@@ -194,7 +193,7 @@ fun StockChart(
             (0..4).forEach { i ->
                 drawContext.canvas.nativeCanvas.apply {
                     drawText(
-                        round(lowerValue + priceStep * i).toString(),
+                        (lowerValue + priceStep * i).roundToInt().toString(),
                         30f,
                         size.height - spacing - i * size.height / 5f,
                         textPaint
@@ -242,9 +241,9 @@ fun StockChart(
             )
             drawPath(
                 path = strokePath,
-                color = graphColor,
+                color = White,
                 style = Stroke(
-                    width = 3.dp.toPx(),
+                    width = 1.dp.toPx(),
                     cap = StrokeCap.Round
                 )
             )
@@ -252,7 +251,6 @@ fun StockChart(
     }
 }
 
-@RequiresApi(Build.VERSION_CODES.O)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
